@@ -34,10 +34,4 @@ public class OwnerController {
         ownerService.delete(id);
         return "deleted";
     }
-
-
-    @GetMapping(value = "/test")
-    public String test(){
-        return "Success";
-    }
 }
