@@ -1,5 +1,7 @@
 package com.kietnguyen.repositories;
 
+import com.kietnguyen.enums.CatBreed;
+import com.kietnguyen.enums.CatColor;
 import com.kietnguyen.models.Cat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +17,10 @@ public interface CatRepository extends JpaRepository<Cat, Integer>{
 
     @Query(value = "FROM Cat cat WHERE cat.owner.id = :ownerId")
     public List<Cat> getAllCatsOfOwner(@Param("ownerId") Integer ownerId);
+
+    @Query(value = "FROM Cat cat WHERE cat.color = :color")
+    public List<Cat> getCatByColor(@Param("color") CatColor color);
+
+    @Query(value = "FROM Cat cat WHERE cat.breed = :breed")
+    public List<Cat> getCatByBreed(@Param("breed") CatBreed breed);
 }

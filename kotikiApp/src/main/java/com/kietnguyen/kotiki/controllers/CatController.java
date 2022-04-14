@@ -1,13 +1,17 @@
 package com.kietnguyen.kotiki.controllers;
 
+import com.kietnguyen.enums.CatBreed;
+import com.kietnguyen.enums.CatColor;
 import com.kietnguyen.models.Cat;
 import com.kietnguyen.models.CatAndFriend;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import com.kietnguyen.services.CatService;
 import com.kietnguyen.services.tools.ServiceException;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/cat")
@@ -24,6 +28,16 @@ public class CatController {
     @GetMapping(value = "/get/{id}")
     public @ResponseBody Cat get(@PathVariable("id") Integer id) throws ServiceException {
         return catService.get(id);
+    }
+
+    @GetMapping(value = "/getByColor")
+    public List<Cat> getByColor(@RequestParam(value = "color") String color) throws ServiceException {
+        return catService.getCatByColor(CatColor.valueOf(color.toUpperCase()));
+    }
+
+    @GetMapping(value = "/getByBreed")
+    public List<Cat> getByBreed(@RequestParam(value = "breed") String breed) throws ServiceException {
+        return catService.getCatByBreed(CatBreed.valueOf(breed.toUpperCase()));
     }
 
     @GetMapping(value = "/getAll")

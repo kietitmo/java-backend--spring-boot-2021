@@ -1,14 +1,14 @@
 package com.kietnguyen.enums;
 
 public enum CatBreed {
-    Abyssinian,
-    Aegean,
-    American,
-    Aphrodite_Giant,
-    Arabian_Mau,
-    Asian,
-    Australian,
-    Balinese,
-    Bambino,
-    Bengal,
+    ABYSSINIAN,
+    AEGEAN,
+    AMERICAN,
+    APHRODITE_GIANT,
+    ARABIAN_MAU,
+    ASIAN,
+    AUSTRALIAN,
+    BALINESE,
+    BAMBINO,
+    BENGAL,
 }

@@ -1,5 +1,7 @@
 package com.kietnguyen.services.impl;
 
+import com.kietnguyen.enums.CatBreed;
+import com.kietnguyen.enums.CatColor;
 import com.kietnguyen.models.CatAndFriend;
 import com.kietnguyen.services.CatService;
 import com.kietnguyen.services.tools.ServiceException;
@@ -80,6 +82,24 @@ public class CatServiceImpl implements CatService {
     public List<Cat> getFriendListOfCat(Integer id) throws ServiceException {
         try {
             return catAndFriendRepository.getFriendListOfCat(id);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Cat> getCatByColor(CatColor color) throws ServiceException {
+        try {
+            return catRepository.getCatByColor(color);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Cat> getCatByBreed(CatBreed breed) throws ServiceException {
+        try {
+            return catRepository.getCatByBreed(breed);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
