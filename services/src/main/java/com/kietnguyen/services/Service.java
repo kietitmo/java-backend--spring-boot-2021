@@ -1,17 +1,17 @@
 package com.kietnguyen.services;
 
-import com.kietnguyen.services.tools.ServiceException;
+import com.kietnguyen.services.tools.ServicesException;
 
 import java.util.List;
 
 public interface Service<T> {
-    public boolean add(T t) throws ServiceException;
+    boolean add(T t) throws ServicesException;
 
-    public List<T> getAll() throws ServiceException;
+    List<T> getAll() throws ServicesException;
 
-    public boolean delete(Integer id) throws ServiceException;
+    boolean delete(Integer id) throws ServicesException;
 
-    public T get(Integer id) throws ServiceException;
+    T get(Integer id) throws ServicesException;
 
-    public boolean update(T t) throws ServiceException;
+    boolean update(T t) throws ServicesException;
 }

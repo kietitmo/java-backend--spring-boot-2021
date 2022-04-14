@@ -1,6 +1,6 @@
 package com.kietnguyen.services.impl;
 
-import com.kietnguyen.services.tools.ServiceException;
+import com.kietnguyen.services.tools.ServicesException;
 import com.kietnguyen.models.Owner;
 import com.kietnguyen.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,56 +15,53 @@ public class OwnerServiceImpl implements OwnerService {
     private OwnerRepository ownerRepository;
 
     @Override
-    public boolean add(Owner owner) throws ServiceException {
+    public boolean add(Owner owner) throws ServicesException {
         try {
             ownerRepository.save(owner);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public List<Owner> getAll() throws ServiceException {
-        List<Owner> ownerList;
+    public List<Owner> getAll() throws ServicesException {
         try {
-            ownerList = ownerRepository.findAll();
+            return ownerRepository.findAll();
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
-
-        return ownerList;
     }
 
     @Override
-    public boolean delete(Integer ownerId) throws ServiceException {
+    public boolean delete(Integer ownerId) throws ServicesException {
         try {
             ownerRepository.deleteById(ownerId);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public Owner get(Integer ownerId) throws ServiceException {
+    public Owner get(Integer ownerId) throws ServicesException {
         Owner owner;
         try {
             owner = ownerRepository.getById(ownerId);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
 
         return owner;
     }
 
     @Override
-    public boolean update(Owner owner) throws ServiceException {
+    public boolean update(Owner owner) throws ServicesException {
         try {
             ownerRepository.save(owner);
             return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 

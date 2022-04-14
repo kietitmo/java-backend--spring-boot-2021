@@ -4,13 +4,12 @@ import com.kietnguyen.enums.CatBreed;
 import com.kietnguyen.enums.CatColor;
 import com.kietnguyen.models.CatAndFriend;
 import com.kietnguyen.services.CatService;
-import com.kietnguyen.services.tools.ServiceException;
+import com.kietnguyen.services.tools.ServicesException;
 import com.kietnguyen.models.Cat;
 import com.kietnguyen.repositories.CatAndFriendRepository;
 import com.kietnguyen.repositories.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,126 +21,126 @@ public class CatServiceImpl implements CatService {
     private CatAndFriendRepository catAndFriendRepository;
 
     @Override
-    public boolean add(Cat cat) throws ServiceException {
+    public boolean add(Cat cat) throws ServicesException {
         try {
             catRepository.save(cat);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public List<Cat> getAll() throws ServiceException {
+    public List<Cat> getAll() throws ServicesException {
         try {
             return catRepository.findAll();
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public boolean delete(Integer catId) throws ServiceException {
+    public boolean delete(Integer catId) throws ServicesException {
         try {
             catRepository.deleteById(catId);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public Cat get(Integer catId) throws ServiceException {
+    public Cat get(Integer catId) throws ServicesException {
         try {
             return catRepository.getById(catId);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public boolean update(Cat cat) throws ServiceException {
+    public boolean update(Cat cat) throws ServicesException {
         try {
             catRepository.save(cat);
             return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public List<Cat> getAllCatsOfOwner(Integer ownerId) throws ServiceException {
+    public List<Cat> getAllCatsOfOwner(Integer ownerId) throws ServicesException {
         try {
             return catRepository.getAllCatsOfOwner(ownerId);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public List<Cat> getFriendListOfCat(Integer id) throws ServiceException {
+    public List<Cat> getFriendListOfCat(Integer id) throws ServicesException {
         try {
             return catAndFriendRepository.getFriendListOfCat(id);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public List<Cat> getCatByColor(CatColor color) throws ServiceException {
+    public List<Cat> getCatByColor(CatColor color) throws ServicesException {
         try {
             return catRepository.getCatByColor(color);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public List<Cat> getCatByBreed(CatBreed breed) throws ServiceException {
+    public List<Cat> getCatByBreed(CatBreed breed) throws ServicesException {
         try {
             return catRepository.getCatByBreed(breed);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 
     @Override
-    public boolean deleteFriendOfCat(Integer id, Integer idFriend) throws ServiceException {
+    public boolean deleteFriendOfCat(Integer id, Integer idFriend) throws ServicesException {
         try {
             catAndFriendRepository.deleteFriendOfCat(id,idFriend);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public boolean deleteAllFriendOfCat(Integer id) throws ServiceException {
+    public boolean deleteAllFriendOfCat(Integer id) throws ServicesException {
         try {
             catAndFriendRepository.deleteAllFriendOfCat(id);
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public boolean addCatAndFriend(CatAndFriend catAndFriend) throws ServiceException {
+    public boolean addCatAndFriend(CatAndFriend catAndFriend) throws ServicesException {
         try {
             catAndFriendRepository.save(catAndFriend);
             catAndFriendRepository.save(new CatAndFriend(catRepository.getById(catAndFriend.getFriend().getId()), catRepository.getById(catAndFriend.getCat().getId())));
-            return true;
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
+        return true;
     }
 
     @Override
-    public CatAndFriend getCAF(Integer catId) throws ServiceException {
+    public CatAndFriend getCAF(Integer catId) throws ServicesException {
         try {
             return catAndFriendRepository.getById(catId);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServicesException(e.getMessage());
         }
     }
 }

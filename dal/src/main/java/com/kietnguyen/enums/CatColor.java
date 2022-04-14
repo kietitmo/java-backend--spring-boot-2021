@@ -6,6 +6,4 @@ public enum CatColor {
     RED,
     BLUE,
     OTHER_COLOR,
-
-
 }
