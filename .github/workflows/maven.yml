@@ -23,7 +23,4 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Test with Maven
       run: mvn test && mvn package
-    - uses: actions/upload-artifact@v1
-      with:
-        name: Package
-        path: staging
+
