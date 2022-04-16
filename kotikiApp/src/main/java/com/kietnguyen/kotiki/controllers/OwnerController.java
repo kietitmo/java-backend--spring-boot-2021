@@ -1,5 +1,6 @@
 package com.kietnguyen.kotiki.controllers;
 
+import com.kietnguyen.models.Cat;
 import com.kietnguyen.models.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,13 @@ public class OwnerController {
     @GetMapping(value = "/getAll")
     public List<Owner> getAll() throws ServicesException {
         return ownerService.getAll();
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public boolean update(@PathVariable("id") Integer id, @RequestBody Owner owner) throws ServicesException {
+        Owner ownerGot = ownerService.get(id);
+        ownerGot.clone(owner);
+        return ownerService.update(ownerGot);
     }
 
     @DeleteMapping(value = "/delete/{id}")

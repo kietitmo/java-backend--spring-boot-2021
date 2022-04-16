@@ -60,4 +60,10 @@ public class Owner implements Serializable {
     public String toString() {
         return ("ID:" + id + "\t\tNAME:" + name + "\t\tBIRTHDAY:" + dateOfBirth + ".");
     }
+
+    public void clone(Owner owner) {
+        this.name = owner.getName();
+        this.dateOfBirth = owner.getDateOfBirth();
+        this.catList = owner.getCatList();
+    }
 }

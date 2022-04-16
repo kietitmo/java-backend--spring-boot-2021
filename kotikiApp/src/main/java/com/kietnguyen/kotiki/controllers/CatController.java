@@ -28,6 +28,13 @@ public class CatController {
         return catService.get(id);
     }
 
+    @PutMapping(value = "/update/{id}")
+    public boolean update(@PathVariable("id") Integer id, @RequestBody Cat cat) throws ServicesException {
+        Cat catGot = catService.get(id);
+        catGot.clone(cat);
+        return catService.update(catGot);
+    }
+
     @GetMapping(value = "/getByColor")
     public List<Cat> getByColor(@RequestParam(value = "color") String color) throws ServicesException {
         return catService.getCatByColor(CatColor.valueOf(color.toUpperCase()));

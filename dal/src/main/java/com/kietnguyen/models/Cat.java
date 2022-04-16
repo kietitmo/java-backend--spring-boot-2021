@@ -89,6 +89,14 @@ public class Cat implements Serializable {
         this.owner = owner;
     }
 
+    public void clone(Cat cat) {
+        this.name = cat.getName();
+        this.dateOfBirth = cat.getDateOfBirth();
+        this.owner = cat.getOwner();
+        this.color = cat.getColor();
+        this.breed = cat.getBreed();
+    }
+
     public String toString()
     {
         return ("ID:" + id + "\t\tNAME:" + name + "\t\tBIRTHDAY:"+ dateOfBirth.toString() + "\t\tBREED:" + breed.toString()  + "\t\tCOLOR:" + color.toString() + ".");
