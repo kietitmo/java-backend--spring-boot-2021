@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.kietnguyen.enums.CatColor;
 import com.kietnguyen.enums.CatBreed;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class Cat implements Serializable {
     private String name;
 
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
@@ -38,7 +40,7 @@ public class Cat implements Serializable {
     private CatBreed breed;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
     public Integer getId() {

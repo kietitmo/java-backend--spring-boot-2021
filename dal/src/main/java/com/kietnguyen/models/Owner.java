@@ -1,6 +1,7 @@
 package com.kietnguyen.models;
 
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class Owner implements Serializable {
     private String name;
 
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
