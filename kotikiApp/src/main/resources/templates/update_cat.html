@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Update Cat</title>
+</head>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+<body>
+<div align="center">
+  <h1>Update Cat</h1>
+  <br/>
+  <form action="#" th:action="@{/cat/save}" th:object="${cat}" method="post">
+    <table border="0" cellpadding="10">
+      <tr>
+        <td>Id:</td>
+        <td><input type="text" th:field="*{id}" readonly="readonly" /></td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td><input type="text" th:field="*{name}" /></td>
+      </tr>
+      <tr>
+        <td>DOB:</td>
+        <td><input type="text" th:field="*{dateOfBirth}" /></td>
+      </tr>
+      <tr>
+        <label>BREED</label>
+        <select  th:field="*{breed}">
+          <option th:each="breed : ${T(com.kietnguyen.enums.CatBreed).values()}"
+                  th:value="${breed}"
+                  th:text="${breed}">
+          </option>
+        </select>
+      </tr>
+      <tr>
+        <label>COLOR</label>
+        <select  th:field="*{color}">
+          <option th:each="color : ${T(com.kietnguyen.enums.CatColor).values()}"
+                  th:value="${color}"
+                  th:text="${color}">
+          </option>
+        </select>
+      </tr>
+      <tr>
+        <label> OWNER </label>
+        <select th:field="*{owner}">
+          <option th:each="owner: ${owners}"
+                  th:value="${owner.getId()}"
+                  th:text="${owner.getName()}"></option>
+        </select>
+      </tr>
+      <tr>
+        <td colspan="2"><button type="submit">Save</button></td>
+      </tr>
+    </table>
+
+  </form>
+</div>
+</body>
+</html>

@@ -9,6 +9,7 @@ import com.kietnguyen.repositories.OwnerRepository;
 import com.kietnguyen.services.impl.CatServiceImpl;
 import com.kietnguyen.services.impl.OwnerServiceImpl;
 import com.kietnguyen.services.tools.ServicesException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
+@Ignore
 public class ServiceTest {
     @InjectMocks
     @Autowired

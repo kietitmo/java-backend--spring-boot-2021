@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  lang="es" xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Manager</title>
+</head>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+<body>
+<div align="center">
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+
+    <h1>User Manager</h1>
+    <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+        <a href="/managerTool/newUser">Create New User</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Owner</th>
+            <th>Role</th>
+
+            <th sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.userId}">ID</td>
+            <td th:text="${user.userName}">Username</td>
+            <td th:text="${user.getOwner().getName()}">Owner</td>
+            <td th:text="${user.getRoles()}">Role</td>
+
+            <td sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a th:href="@{'/managerTool/updateUser/' + ${user.userId}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/user/delete/' + ${user.userId}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

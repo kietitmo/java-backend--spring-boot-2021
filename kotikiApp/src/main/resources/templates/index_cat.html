@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Cat Manager</title>
+</head>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+<body>
+<div align="center">
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+
+    <h1>Cat Manager</h1>
+    <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+        <a href="/managerTool/newCat">Create New cat</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Owner</th>
+            <th>Breed</th>
+            <th>Color</th>
+
+            <th sec:authorize="hasAnyAuthority('ROLE_ADMIN')">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${catList}">
+            <td th:text="${cat.id}">ID</td>
+            <td th:text="${cat.name}">Name</td>
+            <td th:text="${cat.dateOfBirth}">DOB</td>
+            <td th:text="${cat.getOwner().getName()}">ID</td>
+            <td th:text="${cat.getBreed()}">Name</td>
+            <td th:text="${cat.getColor()}">DOB</td>
+
+            <td sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a th:href="@{'/managerTool/updateCat/' + ${cat.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{'/cat/delete/' + ${cat.id}}">Delete</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

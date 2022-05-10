@@ -1,4 +1,4 @@
-package com.kietnguyen.kotiki.controllers;
+package com.kietnguyen.kotiki.controllers.entityControllers;
 
 import com.kietnguyen.enums.CatBreed;
 import com.kietnguyen.enums.CatColor;
@@ -17,7 +17,7 @@ public class CatController {
     @Autowired
     CatService catService;
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/add",produces = "application/json")
     public @ResponseBody Cat add(@RequestBody Cat cat) throws ServicesException {
         catService.add(cat);
         return cat;
@@ -50,7 +50,7 @@ public class CatController {
         return catService.getAll();
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String deleteCat(@PathVariable Integer id) throws ServicesException {
         catService.delete(id);
         return "Deleted";
@@ -86,5 +86,12 @@ public class CatController {
     @GetMapping(value = "/getCAF/{id}")
     public @ResponseBody CatAndFriend getCAF(@PathVariable("id") Integer id) throws ServicesException {
         return catService.getCAF(id);
+    }
+
+    @PostMapping(value = "/save")
+    public String save(@ModelAttribute("cat") Cat cat) throws ServicesException {
+        catService.add(cat);
+
+        return "redirect:/";
     }
 }

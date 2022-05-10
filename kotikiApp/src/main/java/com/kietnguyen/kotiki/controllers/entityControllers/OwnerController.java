@@ -1,6 +1,5 @@
-package com.kietnguyen.kotiki.controllers;
+package com.kietnguyen.kotiki.controllers.entityControllers;
 
-import com.kietnguyen.models.Cat;
 import com.kietnguyen.models.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,13 @@ public class OwnerController {
         ownerService.add(owner);
     }
 
+    @PostMapping(value = "/save")
+    public String save(@ModelAttribute("owner") Owner owner) throws ServicesException {
+        ownerService.add(owner);
+
+        return "redirect:/";
+    }
+
     @GetMapping(value = "/get/{id}")
     public Owner get(@PathVariable("id") Integer id) throws ServicesException {
         return ownerService.get(id);
@@ -37,9 +43,9 @@ public class OwnerController {
         return ownerService.update(ownerGot);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String deleteUser(@PathVariable Integer id) throws ServicesException {
         ownerService.delete(id);
-        return "deleted";
+        return "redirect:/";
     }
 }
