@@ -2,6 +2,7 @@ package com.kietnguyen.models;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 @Table(name = "App_Role", //
         uniqueConstraints = { //
                 @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
-public class AppRole {
+public class AppRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
